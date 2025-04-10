@@ -12,7 +12,6 @@ class StudentsController < ApplicationController
 
   def create
     student = Student.new(student_params)
-
     if student.save
       render json: student, status: :created
     else
@@ -23,9 +22,9 @@ class StudentsController < ApplicationController
 
   def update
     if @student.update(student_params)
-      render json: student
+      render json: @student
     else
-      render json: { errors: student.errors.full_messages },
+      render json: { errors: @student.errors.full_messages },
              status: :unprocessable_entity
     end
   end
@@ -42,7 +41,7 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    params.permit(:name,
+    params.require(:student).permit(:name,
                   :branch,
                   :email,
                   :phone_number,
