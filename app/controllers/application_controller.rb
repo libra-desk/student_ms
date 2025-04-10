@@ -4,12 +4,12 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    token = request.headers['Authorization']
+    token = request.headers["Authorization"]
     decoded_value = JsonWebToken.decode token
     @current_user = decoded_value ? decoded_value : nil
 
     unless @current_user
-      render json: { error: "Unauthorized request!" }, 
+      render json: { error: "Unauthorized request!" },
              status: :unauthorized
     end
   end
