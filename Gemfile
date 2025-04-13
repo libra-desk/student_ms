@@ -49,3 +49,5 @@ end
 gem "jwt", "~> 2.10"
 
 gem "dotenv-rails", "~> 3.1"
+
+gem "ruby-kafka", "~> 1.5"
