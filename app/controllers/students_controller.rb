@@ -15,24 +15,12 @@ class StudentsController < ApplicationController
     render json: @student
   end
 
-  def create
-    student = Student.new(student_params)
-    if student.save
-      Rails.cache.delete("all_students")
-      render json: student, status: :created
-    else
-      render json: { errors: student.errors.full_messages },
-             status: :unprocessable_entity
-    end
-  end
-
   def update
     if @student.update(student_params)
       Rails.cache.delete("all_students")
       render json: @student
     else
-      render json: { errors: @student.errors.full_messages },
-             status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 
@@ -42,7 +30,7 @@ class StudentsController < ApplicationController
       Rails.cache.delete("all_students")
       head :no_content
     else
-      render json: { error: "The student doesn't exist" }
+      head :not_found
     end
   end
 

@@ -38,6 +38,7 @@ class KafkaConsumer
                           year_of_study: year_of_study,
                           email: email
                          )
+    Rails.cache.delete("all_students")
 
     puts "Student has been created successfully"
   rescue => e
